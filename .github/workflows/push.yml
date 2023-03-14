@@ -10,7 +10,11 @@ jobs: # list of things to do
     runs-on: ubuntu-latest # on which machine to run
     steps: # list of steps
       - uses: actions/checkout@v1
-        
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          
       - name: Install NodeJS
         uses: actions/setup-node@v2
         with:
